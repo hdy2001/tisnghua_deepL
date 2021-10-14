@@ -92,8 +92,14 @@ def validate(model, criterion, data_get_next, batch_size, sess):
 		# Get validating data and label
 		val_x, val_y = sess.run(data_get_next)
 
+		# TODO: 检测val_x的尺寸修改神经网络的尺寸
+		print(val_x)
+
 		# Only forward pass
 		logit = model.forward(val_x)
+
+		print(logit)
+
 		loss = criterion.forward(logit, val_y)
 
 		# Record loss and accuracy

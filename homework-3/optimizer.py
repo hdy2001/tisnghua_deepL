@@ -17,11 +17,10 @@ class SGD():
                 # TODO: Put your code here
                 # Calculate diff_W and diff_b using layer.grad_W and layer.grad_b.
                 # Do not forget the weightDecay term.
-                N = layer.num_input
-                layer.diff_W = -(layer.grad_W + self.weightDecay * layer.W /
-                                 N) * self.learningRate
+                # 梯度已经包含了N的计算
+                layer.diff_W = -(layer.grad_W + self.weightDecay * layer.W
+                                 ) * self.learningRate
                 layer.diff_b = -layer.grad_b * self.learningRate
-                # TODO: diff_b需要加上正则化项吗
                 ############################################################################
 
                 # Weight update

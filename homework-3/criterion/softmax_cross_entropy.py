@@ -5,35 +5,42 @@ import numpy as np
 # a small number to prevent dividing by zero, maybe useful for you
 EPS = 1e-11
 
-class SoftmaxCrossEntropyLossLayer():
-	def __init__(self):
-		self.acc = 0.
-		self.loss = np.zeros(1, dtype='f')
 
-	def forward(self, logit, gt):
-		"""
+class SoftmaxCrossEntropyLossLayer():
+    def __init__(self):
+        self.acc = 0.
+        self.loss = np.zeros(1, dtype='f')
+
+    def forward(self, logit, gt):
+        """
 	      Inputs: (minibatch)
 	      - logit: forward results from the last FCLayer, shape(batch_size, 10)
 	      - gt: the ground truth label, shape(batch_size, 10)
 	    """
 
-		############################################################################
-	    # TODO: Put your code here
-		# Calculate the average accuracy and loss over the minibatch, and
-		# store in self.accu and self.loss respectively.
-		# Only return the self.loss, self.accu will be used in solver.py.
+        ############################################################################
+        # TODO: Put your code here
+        # Calculate the average accuracy and loss over the minibatch, and
+        # store in self.accu and self.loss respectively.
+        # Only return the self.loss, self.accu will be used in solver.py.
+        self.logit = logit  # (N,10)
+        self.gt = gt  # (N,10)
+        logit_result = np.argmax(logit, 1)  # (N)
+        gt_result = np.argmax(gt, 1)  # (N)
+        self.loss = -np.sum(gt * np.log(logit), 1)  # (N)
+        self.accu = np.array(logit_result == gt_result)  # (N)
 
+        ############################################################################
 
-	    ############################################################################
+        return self.loss
 
-		return self.loss
+    def backward(self):
 
+        ############################################################################
+        # TODO: Put your code here
+        # Calculate and return the gradient (have the same shape as logit)
+        # TODO: 我不确定是不是对的
+        delta = self.logit - self.gt  # (N, 10)
+        return delta
 
-	def backward(self):
-
-		############################################################################
-	    # TODO: Put your code here
-		# Calculate and return the gradient (have the same shape as logit)
-
-
-	    ############################################################################
+    ############################################################################
