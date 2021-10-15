@@ -32,9 +32,10 @@ class FCLayer():
         ############################################################################
         # TODO: Put your code here
         # Apply linear transformation(Wx+b) to Input, and return results.
-		# Input: (N, input)
+        # Input: (N, input)
         self.input = Input
-        return np.dot(Input, self.W) + self.b.T  # (N, ouput)
+        return np.dot(Input, self.W) + self.b  # (N, ouput)
+
     ############################################################################
 
     def backward(self, delta):
@@ -42,13 +43,18 @@ class FCLayer():
         ############################################################################
         # TODO: Put your code here
         # Calculate the gradient using the later layer's gradient: delta
-		# TODO: delta的尺寸需要改变
-		# delta：(N， ouput)
+        # TODO: delta的尺寸需要改变
+        # delta：(N， ouput)
         N = delta.shape[0]
-        self.grad_W = 1/N * np.dot(self.input.T, delta) # (input, N) * (N, ouput) -> (input, ouput)
-		self.grad_b = 1/N * (delta + self.b).reshape((self.num_output, 1)) # (1, output)
 
-        # TODO: 需要返回delta吗？
+        self.grad_W = 1 / N * np.dot(
+            self.input.T, delta)  # (input, N) * (N, ouput) -> (input, ouput)
+
+        self.grad_b = 1 / N * np.sum(delta, 0).reshape(
+            (1, self.num_output))  # (1, output)
+
+        return np.dot(delta, self.W.T)
+
     ############################################################################
 
     def XavierInit(self):

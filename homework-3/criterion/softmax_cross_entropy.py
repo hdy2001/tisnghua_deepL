@@ -25,10 +25,17 @@ class SoftmaxCrossEntropyLossLayer():
         # Only return the self.loss, self.accu will be used in solver.py.
         self.logit = logit  # (N,10)
         self.gt = gt  # (N,10)
-        logit_result = np.argmax(logit, 1)  # (N)
+        # softmax
+        y = np.exp(logit) / np.sum(np.exp(logit), 1, keepdims=True) # (N, 10)
+        
+        # 记录每次输入数据的softmax值
+        self.y = y
+
+        y_result = np.argmax(y, 1)  # (N)
         gt_result = np.argmax(gt, 1)  # (N)
-        self.loss = -np.sum(gt * np.log(logit), 1)  # (N)
-        self.accu = np.array(logit_result == gt_result)  # (N)
+
+        self.loss = -np.sum(gt * np.log(y), 1)  # (N)
+        self.acc = np.array(y_result == gt_result)  # (N)
 
         ############################################################################
 
@@ -40,7 +47,7 @@ class SoftmaxCrossEntropyLossLayer():
         # TODO: Put your code here
         # Calculate and return the gradient (have the same shape as logit)
         # TODO: 我不确定是不是对的
-        delta = self.logit - self.gt  # (N, 10)
+        delta = self.y - self.gt  # (N, 10)
         return delta
 
     ############################################################################

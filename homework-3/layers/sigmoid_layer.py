@@ -26,8 +26,7 @@ class SigmoidLayer():
         # Calculate the gradient using the later layer's gradient: delta
         # delta: (N, ouput)
         # 导数：f(z)(1-f(z))
-        f_ = 1 / (1 + np.exp(-self.input)) * (1 - 1 / (1 + np.exp(-self.input))
-                                              )  # (N, output)
+        f_ = (1 / (1 + np.exp(-self.input))) * (1 - (1 / (1 + np.exp(-self.input))))  # (N, output)
         return f_ * delta  # (N, output)
 
     ############################################################################

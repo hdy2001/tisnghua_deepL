@@ -5,7 +5,7 @@ import numpy as np
 
 class EuclideanLossLayer():
     def __init__(self):
-        self.accu = 0.
+        self.acc = 0.
         self.loss = 0.
 
     def forward(self, logit, gt):
@@ -25,7 +25,7 @@ class EuclideanLossLayer():
         logit_result = np.argmax(logit, 1)  # (N)
         gt_result = np.argmax(gt, 1)  # (N)
         self.loss = 1 / 2 * np.sum((logit - gt) * (logit - gt), 1)  # (N)
-        self.accu = np.array(logit_result == gt_result)  # (N)
+        self.acc = np.array(logit_result == gt_result)  # (N)
         ############################################################################
         return self.loss
 
