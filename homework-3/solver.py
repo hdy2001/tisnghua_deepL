@@ -112,7 +112,7 @@ def validate(model, criterion, data_get_next, batch_size, sess):
         # Only forward pass
         logit = model.forward(val_x)
 
-        print(logit)
+        # print(logit)
 
         loss = criterion.forward(logit, val_y)
 
