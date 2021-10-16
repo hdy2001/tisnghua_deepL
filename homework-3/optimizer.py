@@ -23,9 +23,5 @@ class SGD():
                 layer.diff_b = -layer.grad_b * self.learningRate
                 ############################################################################
 
-
-                # print("layer.diff_b的尺寸是")
-                # print(layer.diff_b.shape)
-                # Weight update
                 layer.W += layer.diff_W
                 layer.b += layer.diff_b
