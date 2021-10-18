@@ -43,4 +43,4 @@ def plot_loss_and_acc(loss_and_acc_dict):
 if __name__ == '__main__':
 	loss = [x for x in range(10, 0, -1)]
 	acc = [x / 10. for x in range(0, 10)]
-	plotLossAndAcc({'as': [loss, acc]})
+	plot_loss_and_acc({'as': [loss, acc]})

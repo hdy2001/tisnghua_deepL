@@ -120,15 +120,49 @@ reluMLP.add(FCLayer(128, 10))
 
 ### Batch_size对比
 
+```python
+# MLP_0
+batch_size = 100
+# MLP_9
+batch_size_9 = 50
+# MLP_10
+batch_size_10 = 20
+```
 
 
-### Max_epoch对比
 
-
-
-### Learning_rate对比
-
-
+![image-20211018112952514](report.assets/image-20211018112952514.png)
 
 ### Weight_decay对比
 
+```python
+# MLP_0
+weight_decay = 0.1
+# MLP_3
+weight_decay_3 = 0.01
+# MLP_4
+weight_decay_4 = 0.5
+```
+
+
+
+![image-20211018110738600](report.assets/image-20211018110738600.png)
+
+### Learning_rate对比
+
+```python
+# MLP_0
+learning_rate_SGD = 0.001
+# MLP_1
+learning_rate_SGD_1 = 0.01
+# MLP_2
+learning_rate_SGD = 0.1
+```
+
+
+
+![image-20211018113437913](report.assets/image-20211018113437913.png)
+
+### 总结
+
+学习率对于训练的影响相对来说更大（大的学习率更新的更快），weight_decay取的过大时训练无法收敛，batch_size越大，训练的越快。此处的超参数对比分析与上次作业类似，因此略去。
