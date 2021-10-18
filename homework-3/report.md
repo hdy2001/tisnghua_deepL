@@ -118,3 +118,17 @@ reluMLP.add(FCLayer(128, 10))
 
 我选择了助教提供的代码中，激活层为ReLU，损失函数为交叉熵损失的网络结构作为baseline对比。
 
+### Batch_size对比
+
+
+
+### Max_epoch对比
+
+
+
+### Learning_rate对比
+
+
+
+### Weight_decay对比
+
